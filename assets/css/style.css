@@ -1,0 +1,145 @@
+:root {
+    --primary: #3b82f6; /* 浅蓝色 */
+    --primary-gradient: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+    --primary-light: #eff6ff;
+    --primary-dark: #1d4ed8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --radius: 12px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-main);
+    margin: 0;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.wrapper { display: flex; min-height: 100vh; }
+
+/* 侧边栏样式优化 */
+.sidebar {
+    width: 260px;
+    background: var(--bg-card);
+    border-right: 1px solid var(--border);
+    padding: 1.5rem 0;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header { padding: 0 1.5rem 2rem; text-align: center; }
+.sidebar-header h2 { 
+    font-size: 1.25rem; 
+    font-weight: 800; 
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0; 
+}
+
+.nav-menu { list-style: none; padding: 0; margin: 0; }
+.nav-section { padding: 1.5rem 1.5rem 0.5rem; font-size: 0.7rem; font-weight: 700; text-uppercase; color: var(--text-muted); letter-spacing: 0.1em; }
+.nav-item { padding: 0.25rem 1rem; }
+.nav-link {
+    display: flex; align-items: center; padding: 0.75rem 1rem;
+    color: #64748b; text-decoration: none; border-radius: var(--radius);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); font-weight: 500;
+}
+.nav-link i { width: 24px; margin-right: 12px; font-size: 1.1rem; opacity: 0.8; text-align: center; }
+.nav-link:hover { background: var(--primary-light); color: var(--primary); }
+.nav-link.active { background: var(--primary-gradient); color: #fff; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+.nav-link.active i { opacity: 1; }
+
+/* 主内容区 */
+.main-content { flex-grow: 1; padding: 2rem; background: #fbfcfe; }
+
+.admin-navbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 1.5rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border);
+}
+.admin-navbar h4 { font-weight: 700; margin: 0; font-size: 1.5rem; color: var(--text-main); }
+
+/* 卡片样式 */
+.card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+    overflow: hidden; margin-bottom: 1.5rem; border: none;
+}
+.card-header { background: #fff; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); font-weight: 700; color: var(--text-main); }
+.card-body { padding: 1.5rem; }
+
+/* 按钮样式 */
+.btn { font-weight: 600; padding: 0.625rem 1.25rem; border-radius: var(--radius); transition: all 0.2s; border: none; }
+.btn-primary { background: var(--primary-gradient); color: #fff; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2); }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 15px rgba(59, 130, 246, 0.3); color: #fff; }
+
+/* 表格样式 */
+.table { margin: 0; }
+.table thead th { background: #f8fafc; font-size: 0.75rem; font-weight: 700; text-uppercase; color: var(--text-muted); border: none; padding: 1rem 1.5rem; }
+.table tbody td { padding: 1.25rem 1.5rem; vertical-align: middle; border-bottom: 1px solid var(--border); color: #475569; }
+
+/* 状态标签 */
+.badge { font-weight: 700; padding: 0.5em 0.8em; border-radius: 6px; }
+
+/* 背景色辅助类 */
+.bg-primary-gradient { background: var(--primary-gradient) !important; color: #fff !important; }
+.text-primary { color: var(--primary) !important; }
+
+/* 响应式表格优化 */
+@media (max-width: 768px) {
+    .table-responsive {
+        border: 0;
+    }
+    .table thead {
+        display: none;
+    }
+    .table tbody tr {
+        display: block;
+        margin-bottom: 1rem;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 0.5rem;
+    }
+    .table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: right;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #f1f5f9;
+    }
+    .table tbody td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        text-align: left;
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        text-uppercase;
+    }
+    .table tbody td:last-child {
+        border-bottom: 0;
+    }
+}
+
+/* 移动端菜单激活样式 */
+.sidebar.active {
+    left: 0 !important;
+}
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1040;
+    display: none;
+}
+.sidebar.active + .sidebar-overlay {
+    display: block;
+}
